@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class CircleGrabPipe : MonoBehaviour
 {
+    [SerializeField] private bool changeColor;
     [SerializeField] private Color color;
+
+    [SerializeField] private Transform placePos;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<CircleGrab>() != null)
         {
-            other.GetComponent<Renderer>().material.color = color;
+            if(changeColor)
+                other.GetComponent<Renderer>().material.color = color;
 
-            other.transform.position = transform.position;
+            other.transform.position = placePos != null ? placePos.position : transform.position;
             other.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(-90, 0, 0));
         }
     }
