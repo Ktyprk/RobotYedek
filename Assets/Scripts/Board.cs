@@ -15,7 +15,7 @@ public class Board : MonoBehaviour
 
     private void Start()
     {
-        //robot = SquidBodyController.player.gameObject;
+        robot = SubmarineController.Instance.gameObject;
     }
 
     private void OnTriggerEnter(Collider other)
