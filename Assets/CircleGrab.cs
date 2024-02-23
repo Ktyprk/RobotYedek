@@ -6,15 +6,17 @@ public class CircleGrab : MonoBehaviour
 {
     private GameObject robot;
     private Transform robotArm;
+    public Transform grabPoint; // Added grab point reference
 
     public string robotArmTag = "Robot",
-                  circleGrabPipeTag = "Pipe";
+        circleGrabPipeTag = "Pipe";
 
     private bool isBeingCarried, isFinished;
 
     private void Start()
     {
         robot = SubmarineController.Instance.gameObject;
+        grabPoint = robot.transform.GetChild(0);
     }
 
     private void Drop()
@@ -34,6 +36,7 @@ public class CircleGrab : MonoBehaviour
             isBeingCarried = true;
 
             transform.SetParent(robot.transform);
+            transform.position = grabPoint.position; // Teleport to grab point
         }
 
         if (other.CompareTag(circleGrabPipeTag) && !isFinished)
