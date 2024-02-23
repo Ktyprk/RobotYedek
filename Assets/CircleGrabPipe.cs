@@ -17,7 +17,7 @@ public class CircleGrabPipe : MonoBehaviour
                 other.GetComponent<Renderer>().material.color = color;
 
             other.transform.position = placePos != null ? placePos.position : transform.position;
-            other.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(-90, 180, 0));
+            other.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(-90, 0, 0));
         }
     }
 }
