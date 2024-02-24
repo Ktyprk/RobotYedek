@@ -32,7 +32,12 @@ public class SubmarineController : MonoBehaviour
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
 
-        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput).normalized;
+        int yDownInput = Input.GetKey(KeyCode.Q) ? -1 : 0;
+        int yUpInput = Input.GetKey(KeyCode.E) ? 1 : 0;
+
+        float heightInput = yDownInput * movementSpeed + yUpInput * movementSpeed;
+
+        Vector3 movement = new Vector3(horizontalInput, heightInput, verticalInput).normalized;
         transform.Translate(movement * movementSpeed * Time.deltaTime);
     }
 
