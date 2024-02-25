@@ -1,21 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CircleGrab : MonoBehaviour
 {
+    public static CircleGrab Instance { get; private set; }
     private GameObject robot;
-    private Transform robotArm;
+    private Transform robotArm; // This will now represent the specific tentacle that touched the ring.
 
     public string robotArmTag = "Robot",
-        circleGrabPipeTag = "Pipe";
+                  circleGrabPipeTag = "Pipe";
 
     private bool isBeingCarried, isFinished, dropCooldown;
 
     private CircleGrabPipe currentPipe;
 
     [SerializeField] private Vector3 grabRotation;
-
+ 
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+    
     private void Start()
     {
         robot = SubmarineController.Instance.gameObject;
@@ -23,11 +31,11 @@ public class CircleGrab : MonoBehaviour
 
     private void Update()
     {
-        if(isBeingCarried)
+        if (isBeingCarried)
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                if(currentPipe != null)
+                if (currentPipe != null)
                 {
                     if (currentPipe.isRobotArmColliding) return;
 
@@ -50,13 +58,11 @@ public class CircleGrab : MonoBehaviour
     private IEnumerator DropCooldown()
     {
         dropCooldown = true;
-
         yield return new WaitForSeconds(2f);
-
         dropCooldown = false;
     }
 
-    private void Drop()
+    public void Drop()
     {
         GetComponent<Rigidbody>().isKinematic = false;
 
@@ -74,13 +80,17 @@ public class CircleGrab : MonoBehaviour
         {
             robotArm = other.transform;
 
-            isBeingCarried = true;
+            // Find the attachment point under the tentacle that touched the ring.
+            Transform attachPoint = robotArm.Find("AttachPoint"); // Ensure each tentacle has an AttachPoint GameObject.
+            if (attachPoint != null)
+            {
+                isBeingCarried = true;
+                transform.SetParent(attachPoint);
+                transform.localPosition = Vector3.zero; // Optionally, adjust this to match the exact desired position relative to the attachPoint.
+                transform.localRotation = Quaternion.Euler(grabRotation);
 
-            transform.SetParent(RobotCarryPoint.carryPoint);
-            transform.position = RobotCarryPoint.carryPoint.position;
-            transform.rotation = Quaternion.Euler(RobotCarryPoint.carryPoint.rotation.eulerAngles + grabRotation);
-
-            GetComponent<Rigidbody>().isKinematic = true;
+                GetComponent<Rigidbody>().isKinematic = true;
+            }
         }
 
         if (other.CompareTag(circleGrabPipeTag) && !isFinished)
@@ -91,9 +101,10 @@ public class CircleGrab : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag(circleGrabPipeTag) && !isFinished && other.GetComponent<CircleGrabPipe>() == currentPipe)
+        if (other.CompareTag(circleGrabPipeTag) && !isFinished && other.GetComponent<CircleGrabPipe>() == currentPipe)
         {
             currentPipe = null;
-        }
-    }
+ 
+}
+}
 }
