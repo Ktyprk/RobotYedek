@@ -69,7 +69,7 @@ public class SquidBodyController : MonoBehaviour
     {
         Debug.Log("Drop action triggered");
         // Implement your drop logic here
-         CircleGrab.Instance.Drop();
+        // CircleGrab.Instance.Drop();
         
     }
 
