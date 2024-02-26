@@ -73,11 +73,12 @@ public class CircleGrab : MonoBehaviour
         if (other.CompareTag(robotArmTag) && !isFinished && !isBeingCarried && !dropCooldown)
         {
             robotArm = other.transform;
+            Transform attachPoint = robotArm.Find("AttachPoint"); 
 
             isBeingCarried = true;
 
-            transform.SetParent(RobotCarryPoint.carryPoint);
-            transform.position = RobotCarryPoint.carryPoint.position;
+            transform.SetParent(attachPoint);
+            //transform.position = RobotCarryPoint.carryPoint.position;
             transform.rotation = Quaternion.Euler(RobotCarryPoint.carryPoint.rotation.eulerAngles + grabRotation);
 
             GetComponent<Rigidbody>().isKinematic = true;

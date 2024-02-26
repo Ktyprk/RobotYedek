@@ -3365,6 +3365,7 @@ GameObject:
   - component: {fileID: 4887613170942993422}
   - component: {fileID: 4887613170942993421}
   - component: {fileID: 4887613170942993423}
+  - component: {fileID: 1147957429621423658}
   m_Layer: 0
   m_Name: BrokenLight
   m_TagString: Untagged
@@ -3445,14 +3446,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4887613170942993420}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 903fc7dc25dae2744a701cc6bf415e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   robotArmTag: Robot
   circleGrabPipeTag: Pipe
-  grabRotation: {x: -90, y: 0, z: 0}
+  grabRotation: {x: -90, y: 180, z: 0}
 --- !u!65 &4887613170942993421
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3482,6 +3483,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1147957429621423658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887613170942993420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb3f9d6cfebe6b408f0e80a9c0593a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotArmTag: Robot
+  circleGrabPipeTag: Pipe
+  grabRotation: {x: -90, y: 180, z: 180}
 --- !u!1 &4963506815494208648
 GameObject:
   m_ObjectHideFlags: 0
