@@ -78,7 +78,7 @@ public class CircleGrab : MonoBehaviour
             isBeingCarried = true;
 
             transform.SetParent(attachPoint);
-            //transform.position = RobotCarryPoint.carryPoint.position;
+            transform.position = attachPoint.position;
             transform.rotation = Quaternion.Euler(RobotCarryPoint.carryPoint.rotation.eulerAngles + grabRotation);
 
             GetComponent<Rigidbody>().isKinematic = true;

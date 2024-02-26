@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static RosSharp.Urdf.Link;
 
 public class LightGrab : MonoBehaviour
 {
@@ -15,9 +16,17 @@ public class LightGrab : MonoBehaviour
     private CircleGrabPipe currentPipe;
 
     [SerializeField] private Vector3 grabRotation;
+    [SerializeField] private float grabScale = 0.5f;
+    [SerializeField] private Transform submarineDropPos;
+
+    private Vector3 defScale;
+
+    private bool isInsideSubmarine;
 
     private void Start()
     {
+        defScale = transform.localScale;
+
         robot = SubmarineController.Instance.gameObject;
     }
 
@@ -27,7 +36,7 @@ public class LightGrab : MonoBehaviour
         {
             if(Input.GetKeyDown(KeyCode.F))
             {
-                if(currentPipe != null)
+                if (currentPipe != null)
                 {
                     if (currentPipe.isRobotArmColliding) return;
 
@@ -36,6 +45,8 @@ public class LightGrab : MonoBehaviour
 
                     transform.parent = null;
                     robotArm = null;
+
+                    transform.localScale = defScale * 1.5f;
 
                     currentPipe.PlaceCircle(gameObject);
                 }
@@ -65,16 +76,28 @@ public class LightGrab : MonoBehaviour
         transform.parent = null;
         robotArm = null;
 
+        transform.localScale = defScale;
+
+        if (isInsideSubmarine)
+            transform.position = submarineDropPos.position;
+
         StartCoroutine(DropCooldown());
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "Denizalti")
+        {
+            isInsideSubmarine = true;
+        }
+
         if (other.CompareTag(robotArmTag) && !isFinished && !isBeingCarried && !dropCooldown)
         {
             robotArm = other.transform;
 
             isBeingCarried = true;
+
+            transform.localScale = defScale * grabScale;
 
             transform.SetParent(RobotCarryPoint.carryPoint);
             transform.position = RobotCarryPoint.carryPoint.position;
@@ -91,7 +114,12 @@ public class LightGrab : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag(circleGrabPipeTag) && !isFinished && other.GetComponent<CircleGrabPipe>() == currentPipe)
+        if (other.gameObject.tag == "Denizalti")
+        {
+            isInsideSubmarine = false;
+        }
+
+        if (other.CompareTag(circleGrabPipeTag) && !isFinished && other.GetComponent<CircleGrabPipe>() == currentPipe)
         {
             currentPipe = null;
         }
