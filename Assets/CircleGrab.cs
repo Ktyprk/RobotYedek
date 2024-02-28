@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CircleGrab : MonoBehaviour
 {
+    public static CircleGrab Instance { get; private set; }
+    
     private GameObject robot;
     private Transform robotArm;
 
@@ -15,7 +17,7 @@ public class CircleGrab : MonoBehaviour
     private CircleGrabPipe currentPipe;
 
     [SerializeField] private Vector3 grabRotation;
-
+    
     private void Start()
     {
         robot = SubmarineController.Instance.gameObject;
@@ -23,29 +25,35 @@ public class CircleGrab : MonoBehaviour
 
     private void Update()
     {
-        if(isBeingCarried)
+        if (isBeingCarried)
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                if(currentPipe != null)
-                {
-                    if (currentPipe.isRobotArmColliding) return;
-
-                    isBeingCarried = false;
-                    isFinished = true;
-
-                    transform.parent = null;
-                    robotArm = null;
-
-                    currentPipe.PlaceCircle(gameObject);
-                }
-                else
-                {
-                    Drop();
-                }
+                DropAction();
             }
         }
     }
+    
+    public void DropAction()
+    {
+        if (currentPipe != null)
+        {
+            if (currentPipe.isRobotArmColliding) return;
+
+            isBeingCarried = false;
+            isFinished = true;
+
+            transform.parent = null;
+            robotArm = null;
+
+            currentPipe.PlaceCircle(gameObject);
+        }
+        else
+        {
+            Drop();
+        }
+    }
+
 
     private IEnumerator DropCooldown()
     {
@@ -56,7 +64,7 @@ public class CircleGrab : MonoBehaviour
         dropCooldown = false;
     }
 
-    private void Drop()
+    public void Drop()
     {
         GetComponent<Rigidbody>().isKinematic = false;
 
@@ -76,6 +84,8 @@ public class CircleGrab : MonoBehaviour
             Transform attachPoint = robotArm.Find("AttachPoint"); 
 
             isBeingCarried = true;
+
+            Instance = this;
 
             transform.SetParent(attachPoint);
             transform.position = attachPoint.position;

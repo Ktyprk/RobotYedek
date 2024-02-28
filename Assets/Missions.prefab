@@ -116,7 +116,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &117280393
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &468655755
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -378,7 +378,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &511170635
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -509,7 +509,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &1171669319
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -640,7 +640,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &1234007843
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -771,7 +771,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &1397747055
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -786,6 +786,37 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8803937527578110353, guid: adc6134872274c445a1b162a427baef3, type: 3}
+--- !u!1 &1663289650
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1663289651}
+  m_Layer: 0
+  m_Name: SubmarineInsideDropPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1663289651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663289650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.506, z: 0.636}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4126450348670918772}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1694883832
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +933,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &1694883834
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1033,7 +1064,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &1810129294
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1164,7 +1195,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &1824831706
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1295,7 +1326,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &1943721681
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1324,7 +1355,7 @@ GameObject:
   - component: {fileID: 4716419813970148197}
   m_Layer: 0
   m_Name: Cylinder.002
-  m_TagString: Untagged
+  m_TagString: Denizalti
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1450,6 +1481,7 @@ Transform:
   - {fileID: 1208920698892587059}
   - {fileID: 5087408112601097284}
   - {fileID: 5117308773205245985}
+  - {fileID: 1663289651}
   m_Father: {fileID: 4525732554033375530}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -107.5, z: 0}
@@ -3498,6 +3530,8 @@ MonoBehaviour:
   robotArmTag: Robot
   circleGrabPipeTag: Pipe
   grabRotation: {x: -90, y: 180, z: 180}
+  grabScale: 0.6
+  submarineDropPos: {fileID: 1663289651}
 --- !u!1 &4963506815494208648
 GameObject:
   m_ObjectHideFlags: 0
@@ -3640,9 +3674,10 @@ GameObject:
   - component: {fileID: 7155490505055278414}
   - component: {fileID: 561018728605620110}
   - component: {fileID: 6696644316126687013}
+  - component: {fileID: 1460380120}
   m_Layer: 0
   m_Name: Cylinder.001
-  m_TagString: Untagged
+  m_TagString: Denizalti
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3712,6 +3747,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1460380120
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253990017316955820}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7387706064836869012, guid: 255e4fc0ea414114e865dbad0a9a76a3, type: 3}
 --- !u!1 &6724834147006024375
 GameObject:
   m_ObjectHideFlags: 0
@@ -3738,7 +3787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6724834147006024375}
   m_LocalRotation: {x: -0.00000013767877, y: 0.7071068, z: 0.70710677, w: 0.00000013767878}
-  m_LocalPosition: {x: -0, y: -0.8921205, z: -0.036211293}
+  m_LocalPosition: {x: -0, y: -0.8921205, z: 0.147}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3911,7 +3960,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 122
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &419210345825359901
 MeshCollider:
   m_ObjectHideFlags: 0
